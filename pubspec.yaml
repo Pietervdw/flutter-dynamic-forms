@@ -15,8 +15,6 @@ dependencies:
   form_builder_validators: ^9.0.0
   home:
     path: packages/features/home
-  extensions_library:
-    path: packages/extensions_library
   form_repository:
     path: packages/form_repository
   domain_models:

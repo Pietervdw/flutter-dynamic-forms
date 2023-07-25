@@ -61,7 +61,7 @@ class FormRepository {
 
   Future<DynamicForm> loadForm() async {
     // Simulate loading Time as if calling an API
-    await Future.delayed(const Duration(seconds: 15));
+    await Future.delayed(const Duration(seconds: 3));
     final dynamicForm = DynamicForm.fromJson(jsonDecode(getJson()));
     return dynamicForm;
   }
