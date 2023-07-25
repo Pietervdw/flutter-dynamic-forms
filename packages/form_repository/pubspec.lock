@@ -41,13 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
-  extensions_library:
-    dependency: "direct main"
-    description:
-      path: "packages/extensions_library"
-      relative: true
-    source: path
-    version: "0.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -56,35 +49,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
-  flex_color_scheme:
-    dependency: "direct main"
-    description:
-      name: flex_color_scheme
-      sha256: "659cf59bd5ccaa1e7de9384342be8b666ff10b108ed57a7fd46c122fb8bf6aca"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.2.0"
-  flex_seed_scheme:
-    dependency: transitive
-    description:
-      name: flex_seed_scheme
-      sha256: "29c12aba221eb8a368a119685371381f8035011d18de5ba277ad11d7dfb8657f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_form_builder:
-    dependency: "direct main"
-    description:
-      name: flutter_form_builder
-      sha256: e828c11156d75fc668da1d8e7ddc2311ea8368f023fd28a7c7c126c8b903c5d6
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -93,59 +62,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
-  flutter_localizations:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  form_builder_validators:
-    dependency: "direct main"
-    description:
-      name: form_builder_validators
-      sha256: e04998b1597d76a51da7f009ed3b2f12d4173f13e146e8744fd2453e8595a2c9
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.0.0"
-  form_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/form_repository"
-      relative: true
-    source: path
-    version: "0.0.0"
-  go_router:
-    dependency: "direct main"
-    description:
-      name: go_router
-      sha256: abc95b139589dc7a34617bf9dfa73b02256108acfec99a6331a43d384d70bb5b
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.0.0"
-  home:
-    dependency: "direct main"
-    description:
-      path: "packages/features/home"
-      relative: true
-    source: path
-    version: "0.0.0"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.18.0"
   js:
     dependency: transitive
     description:
@@ -162,22 +83,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      sha256: "7ad7215c15420a102ec687bb320a7312afd449bac63bfb1c60d9787c27b9767f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
-  logging:
-    dependency: transitive
-    description:
-      name: logging
-      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   matcher:
     dependency: transitive
     description:
@@ -273,4 +178,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=3.0.5 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=1.17.0"

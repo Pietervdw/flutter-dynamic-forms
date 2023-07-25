@@ -1,4 +1,4 @@
-name: home
+name: form_repository
 publish_to: none
 
 environment:
@@ -8,12 +8,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_form_builder: ^9.1.0
-  form_builder_validators: ^9.0.0
-  extensions_library:
-    path: ../../extensions_library
-  form_repository:
-    path: ../../form_repository
 
 dev_dependencies:
   flutter_test:
