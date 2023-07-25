@@ -19,6 +19,8 @@ dependencies:
     path: packages/extensions_library
   form_repository:
     path: packages/form_repository
+  domain_models:
+    path: packages/domain_models
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +29,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/

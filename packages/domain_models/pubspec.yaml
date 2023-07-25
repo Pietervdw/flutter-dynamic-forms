@@ -1,4 +1,4 @@
-name: form_repository
+name: domain_models
 publish_to: none
 
 environment:
@@ -8,10 +8,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  domain_models:
-    path: ../domain_models
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  json_serializable: ^6.7.0
+  build_runner: ^2.4.4
