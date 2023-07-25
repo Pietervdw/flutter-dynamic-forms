@@ -1,11 +1,4 @@
-import 'dart:convert';
-
-import 'package:domain_models/domain_models.dart';
-
-class FormRepository {
-
-  String getJson() {
-    String json = '''{
+{
   "id": 1,
   "name": "Contact Details Form",
   "fields": [
@@ -55,14 +48,4 @@ class FormRepository {
       "validations": {"required": true}
     }
   ]
-}''';
-    return json;
-  }
-
-  Future<DynamicForm> loadForm() async {
-    // Simulate loading Time as if calling an API
-    await Future.delayed(const Duration(seconds: 15));
-    final dynamicForm = DynamicForm.fromJson(jsonDecode(getJson()));
-    return dynamicForm;
-  }
 }

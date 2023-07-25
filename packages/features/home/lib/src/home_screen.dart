@@ -1,4 +1,4 @@
-import 'package:extensions_library/extensions_library.dart';
+import 'package:domain_models/domain_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -23,11 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contact Details Form'),
+        title: const Text("Dynamic Forms"),
       ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: widget.formRepository.loadForm(id: 1),
-        builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+      body: FutureBuilder<DynamicForm?>(
+        future: widget.formRepository.loadForm(),
+        builder: (BuildContext context, AsyncSnapshot<DynamicForm?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: Column(
@@ -52,10 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: FormBuilder(
                 key: _formKey,
                 child: Column(
-                  children: snapshot.data!
+                  children: snapshot.data!.fields
                       .map(
-                        (field) => DynamicFormField(
-                          fieldData: field,
+                        (field) => DynamicFormInput(
+                          field: field,
                         ),
                       )
                       .toList(),
@@ -94,70 +94,69 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class DynamicFormField extends StatelessWidget {
-  final Map<String, dynamic> fieldData;
+class DynamicFormInput extends StatelessWidget {
+  final DynamicFormField field;
 
-  const DynamicFormField({
+  const DynamicFormInput({
     super.key,
-    required this.fieldData,
+    required this.field,
   });
 
   @override
   Widget build(BuildContext context) {
-    final validations = fieldData['validations'];
-    final fieldType = fieldData['type'];
-    final fieldLabel = fieldData['label'];
-
-    switch (fieldType) {
+    switch (field.type) {
       case 'TextBox':
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
           child: FormBuilderTextField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            name: fieldData['key'].toString(),
-            decoration: InputDecoration(labelText: fieldLabel),
-            keyboardType: (validations != null && validations['numeric'] != null)
-                ? const TextInputType.numberWithOptions()
-                : null,
+            name: field.key,
+            decoration: InputDecoration(labelText: field.label),
+            keyboardType: _getInputType(
+              field.validations.numeric,
+              field.validations.email,
+            ),
             validator: FormBuilderValidators.compose(
               [
-                if (validations != null && validations['required'])
+                if (field.validations.required)
                   FormBuilderValidators.required(errorText: 'Required'),
-                if (validations != null && validations['minLength'] != null)
-                  FormBuilderValidators.minLength(validations['minLength']),
-                if (validations != null && validations['maxLength'] != null)
-                  FormBuilderValidators.maxLength(validations['maxLength']),
-                if (validations != null && validations['email'] != null)
+                if (field.validations.email != null && field.validations.email == true)
                   FormBuilderValidators.email(errorText: "A valid email is required"),
-                if (validations != null && validations['numeric'] != null)
+                if (field.validations.numeric != null && field.validations.numeric == true)
                   FormBuilderValidators.numeric(errorText: "A number is required"),
+                if (field.validations.minLength != null)
+                  FormBuilderValidators.minLength(field.validations.minLength!),
+                if (field.validations.maxLength != null)
+                  FormBuilderValidators.maxLength(field.validations.maxLength!),
               ],
             ),
           ),
         );
+
       case 'DropdownList':
         return FormBuilderDropdown(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          name: fieldData['key'].toString(),
-          decoration: InputDecoration(labelText: fieldLabel.toString()),
-          items: fieldData['options']
+          name: field.key,
+          decoration: InputDecoration(labelText: field.label),
+          items: field.options!
               .map<DropdownMenuItem<String>>(
-                (String province) => DropdownMenuItem(
-                  value: province,
-                  child: Text(province),
+                (String value) => DropdownMenuItem(
+                  value: value,
+                  child: Text(value),
                 ),
               )
               .toList(),
           validator: FormBuilderValidators.compose([
-            if (validations != null && validations['required'])
+            if (field.validations.required)
               FormBuilderValidators.required(errorText: 'Please make a selection'),
           ]),
         );
+
       default:
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Field Type [${fieldType.toString()}] does not exist.",
+            "Field Type [${field.type}] does not exist.",
             style: const TextStyle(
               color: Colors.redAccent,
               fontWeight: FontWeight.bold,
@@ -165,5 +164,15 @@ class DynamicFormField extends StatelessWidget {
           ),
         );
     }
+  }
+
+  TextInputType _getInputType(bool? numeric, bool? email) {
+    if (numeric != null && numeric == true) {
+      return TextInputType.number;
+    }
+    if (email != null && email == true) {
+      return TextInputType.emailAddress;
+    }
+    return TextInputType.text;
   }
 }
