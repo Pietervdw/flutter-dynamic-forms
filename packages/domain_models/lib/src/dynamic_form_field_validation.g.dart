@@ -9,7 +9,7 @@ part of 'dynamic_form_field_validation.dart';
 DynamicFormFieldValidation _$DynamicFormFieldValidationFromJson(
         Map<String, dynamic> json) =>
     DynamicFormFieldValidation(
-      isRequired: json['isRequired'] as bool,
+      required: json['required'] as bool,
       minLength: json['minLength'] as int?,
       maxLength: json['maxLength'] as int?,
       email: json['email'] as bool?,
@@ -19,7 +19,7 @@ DynamicFormFieldValidation _$DynamicFormFieldValidationFromJson(
 Map<String, dynamic> _$DynamicFormFieldValidationToJson(
         DynamicFormFieldValidation instance) =>
     <String, dynamic>{
-      'isRequired': instance.isRequired,
+      'required': instance.required,
       'minLength': instance.minLength,
       'maxLength': instance.maxLength,
       'email': instance.email,

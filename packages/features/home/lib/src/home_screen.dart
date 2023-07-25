@@ -1,5 +1,4 @@
 import 'package:domain_models/domain_models.dart';
-import 'package:extensions_library/extensions_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -27,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Dynamic Forms"),
       ),
       body: FutureBuilder<DynamicForm?>(
-        future: widget.formRepository.loadForm2(),
+        future: widget.formRepository.loadForm(),
         builder: (BuildContext context, AsyncSnapshot<DynamicForm?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -119,7 +118,7 @@ class DynamicFormInput extends StatelessWidget {
             ),
             validator: FormBuilderValidators.compose(
               [
-                if (field.validations.isRequired)
+                if (field.validations.required)
                   FormBuilderValidators.required(errorText: 'Required'),
                 if (field.validations.email != null && field.validations.email == true)
                   FormBuilderValidators.email(errorText: "A valid email is required"),
@@ -148,7 +147,7 @@ class DynamicFormInput extends StatelessWidget {
               )
               .toList(),
           validator: FormBuilderValidators.compose([
-            if (field.validations.isRequired)
+            if (field.validations.required)
               FormBuilderValidators.required(errorText: 'Please make a selection'),
           ]),
         );
